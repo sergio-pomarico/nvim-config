@@ -8,7 +8,8 @@ Configuration for nvim editor based on the `lua` language
 - [material.nvim](https://github.com/marko-cerovac/material.nvim): a port of Material colorscheme for nvim.
 - [nvim-web-devicons](https://github.com/nvim-tree/nvim-web-devicons): icon library for file types for nvim plugins
 - [nvim-tree](https://github.com/nvim-tree/nvim-tree.lua): a file explorer for nvim
+- [nvim-treesitter](https://github.com/nvim-treesitter/nvim-treesitter): source code parser
 
 ## Keymaps
 
-- `ctrl + b`: toggle file explore
+- `ctrl + b` : toggle file explore
