@@ -12,7 +12,6 @@ packer.startup(function(use)
   use 'marko-cerovac/material.nvim' -- Material Color Theme
   use 'kyazdani42/nvim-web-devicons' -- File icons
   use 'nvim-lualine/lualine.nvim' -- Status line	
-  use 'nvim-tree/nvim-tree.lua' -- File Explorer
   use {
     'nvim-treesitter/nvim-treesitter',  -- Syntax Highlighting
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
