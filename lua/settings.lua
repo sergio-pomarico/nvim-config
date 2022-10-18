@@ -11,9 +11,9 @@ set.number = true
 set.termguicolors = true
 
 -- Tabs & indents
-opt.autoindent = true
-opt.breakindent = true
-opt.expandtab = true
-opt.smarttab = true
-opt.smartindent = true
-opt.tabstop = 2
+set.autoindent = true
+set.breakindent = true
+set.expandtab = true
+set.smarttab = true
+set.smartindent = true
+set.tabstop = 2
