@@ -6,6 +6,6 @@ lualine.setup({
   lualine_style = 'stealth',
   options = {
     icons_enabled = true,
-    theme = 'material'
+    theme = 'tokyonight'
   },
 })
