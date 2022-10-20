@@ -17,5 +17,10 @@ packer.startup(function(use)
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
   }
   use 'neovim/nvim-lspconfig' -- Nvim Language Server Protocol
+  use 'onsails/lspkind-nvim' -- vscode-like pictograms
+  use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
+  use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
+  use 'hrsh7th/nvim-cmp' -- Completion
+  use 'L3MON4D3/LuaSnip'
   use 'lewis6991/gitsigns.nvim'
 end)
