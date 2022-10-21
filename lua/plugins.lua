@@ -22,5 +22,7 @@ packer.startup(function(use)
   use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
   use 'hrsh7th/nvim-cmp' -- Completion
   use 'L3MON4D3/LuaSnip'
+  use 'windwp/nvim-autopairs'
+  use 'windwp/nvim-ts-autotag'
   use 'lewis6991/gitsigns.nvim'
 end)
