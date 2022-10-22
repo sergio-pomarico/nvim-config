@@ -7,8 +7,9 @@ set.fileencoding = 'utf-8'
 -- line number
 set.number = true
 
--- Highlights code
+-- UI
 set.termguicolors = true
+set.title = true
 
 -- Tabs & indents
 set.autoindent = true
@@ -25,3 +26,7 @@ set.winblend = 0
 set.wildoptions = 'pum'
 set.pumblend = 5
 set.background = 'dark'
+
+set.mouse = 'a'
+set.scrolloff = 10
+set.wrap = true
