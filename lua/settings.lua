@@ -13,10 +13,7 @@ set.title = true
 
 -- Tabs & indents
 set.autoindent = true
-set.breakindent = true
 set.expandtab = true
-set.smarttab = true
-set.smartindent = true
 set.tabstop = 2
 set.shiftwidth = 2
 
@@ -27,6 +24,19 @@ set.wildoptions = 'pum'
 set.pumblend = 5
 set.background = 'dark'
 
+-- Line wrapping
+set.wrap = true
+
+-- Scrolling
 set.mouse = 'a'
 set.scrolloff = 10
-set.wrap = true
+
+-- Search
+set.ignorecase = true
+set.smartcase = true
+
+-- Backspace
+set.backspace = 'indent,eol,start'
+
+-- Clipboard
+set.clipboard:append { 'unnamedplus' }

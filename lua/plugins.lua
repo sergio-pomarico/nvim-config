@@ -24,6 +24,7 @@ packer.startup(function(use)
   use 'L3MON4D3/LuaSnip'
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
+  use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim'
   use 'lewis6991/gitsigns.nvim'
 end)
