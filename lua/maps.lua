@@ -10,3 +10,6 @@ map.set('n', '<C-h>', builtin.help_tags, {})
 -- Bufferline
 map.set('n', '<Tab>', '<Cmd>BufferLineCycleNext<CR>', {})
 map.set('n', '<S-Tab>', '<Cmd>BufferLineCyclePrev<CR>', {})
+
+--NvimTree
+map.set('n', '<C-b>', '<Cmd>NvimTreeToggle<CR>', {})
