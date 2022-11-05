@@ -14,7 +14,7 @@ local packer_bootstrap = ensure_packer()
 vim.cmd([[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost plugins.lua source <afile> | PackerCompile
+    autocmd BufWritePost plugins.lua source <afile> | PackerSync
   augroup end
 ]])
 
@@ -27,22 +27,31 @@ end
 
 packer.startup(function(use)
   use 'wbthomason/packer.nvim' -- Packer pakage
-  use 'folke/tokyonight.nvim'
+  use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
+  use 'folke/tokyonight.nvim' -- Color scheme
   use 'kyazdani42/nvim-web-devicons' -- File icons
   use 'nvim-lualine/lualine.nvim' -- Status line
   use {
     'nvim-treesitter/nvim-treesitter', -- Syntax Highlighting
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
   }
+
+  -- autocompletion
+  use 'hrsh7th/nvim-cmp' --completion plugin
+  use 'hrsh7th/cmp-buffer' --source for text in buffer
+  use 'hrsh7th/cmp-path' -- source for file system paths
+
+  -- snippets
+  use 'L3MON4D3/LuaSnip'
+  use("saadparwaiz1/cmp_luasnip") -- for autocompletion
+  use("rafamadriz/friendly-snippets") -- useful snippets
+
+  use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
   use 'neovim/nvim-lspconfig' -- Nvim Language Server Protocol
   use 'onsails/lspkind-nvim' -- vscode-like pictograms
-  use 'hrsh7th/cmp-buffer' -- nvim-cmp source for buffer words
-  use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
-  use 'hrsh7th/nvim-cmp' -- Completion
-  use 'L3MON4D3/LuaSnip'
+
   use 'windwp/nvim-autopairs'
   use 'windwp/nvim-ts-autotag'
-  use 'nvim-lua/plenary.nvim'
   use 'nvim-telescope/telescope.nvim' -- File fuzzy finder
   use 'akinsho/nvim-bufferline.lua' -- Tabs
   use 'nvim-tree/nvim-tree.lua' -- File explore
