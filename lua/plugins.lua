@@ -46,8 +46,13 @@ packer.startup(function(use)
   use("saadparwaiz1/cmp_luasnip") -- for autocompletion
   use("rafamadriz/friendly-snippets") -- useful snippets
 
-  use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
+  -- managing & installing lsp servers, linters & formatters
+  use 'williamboman/mason.nvim'
+  use 'williamboman/mason-lspconfig.nvim'
+
+  -- language server protocol
   use 'neovim/nvim-lspconfig' -- Nvim Language Server Protocol
+  use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
   use 'onsails/lspkind-nvim' -- vscode-like pictograms
 
   use 'windwp/nvim-autopairs'
