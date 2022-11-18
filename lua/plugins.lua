@@ -54,9 +54,14 @@ packer.startup(function(use)
   use 'neovim/nvim-lspconfig' -- Nvim Language Server Protocol
   use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
   use 'onsails/lspkind-nvim' -- vscode-like pictograms
+  use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
+
+  -- formatting and linting
+  use 'jose-elias-alvarez/null-ls.nvim'
+  use 'jayp0521/mason-null-ls.nvim'
 
   use 'windwp/nvim-autopairs'
-  use 'windwp/nvim-ts-autotag'
+  -- use 'windwp/nvim-ts-autotag'
   use 'nvim-telescope/telescope.nvim' -- File fuzzy finder
   use 'akinsho/nvim-bufferline.lua' -- Tabs
   use 'nvim-tree/nvim-tree.lua' -- File explore

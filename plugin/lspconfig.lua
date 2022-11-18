@@ -3,6 +3,8 @@ local status, lsp = pcall(require, 'lspconfig')
 if (not status) then return end
 
 local protocol = require('vim.lsp.protocol')
+-- Set up completion using nvim_cmp with LSP source
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
 
 local on_attach = function(client, bufnr)
   -- Formating
@@ -15,12 +17,14 @@ local on_attach = function(client, bufnr)
 end
 
 lsp.tsserver.setup {
+  capabilities = capabilities,
   on_attach = on_attach,
   filetypes = { 'typescript', 'typescriptreact', 'typescript.tsx' },
   cmd = { 'typescript-language-server', '--stdio' }
 }
 
 lsp.sumneko_lua.setup {
+  capabilities = capabilities,
   on_attach = on_attach,
   settings = {
     Lua = {
