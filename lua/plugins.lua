@@ -27,7 +27,7 @@ end
 
 packer.startup(function(use)
   use 'wbthomason/packer.nvim' -- Packer pakage
-  use("nvim-lua/plenary.nvim") -- lua functions that many plugins use
+  use 'nvim-lua/plenary.nvim' -- lua functions that many plugins use
   use 'folke/tokyonight.nvim' -- Color scheme
   use 'kyazdani42/nvim-web-devicons' -- File icons
   use 'nvim-lualine/lualine.nvim' -- Status line
@@ -43,8 +43,8 @@ packer.startup(function(use)
 
   -- snippets
   use 'L3MON4D3/LuaSnip'
-  use("saadparwaiz1/cmp_luasnip") -- for autocompletion
-  use("rafamadriz/friendly-snippets") -- useful snippets
+  use 'saadparwaiz1/cmp_luasnip' -- for autocompletion
+  use 'rafamadriz/friendly-snippets' -- useful snippets
 
   -- managing & installing lsp servers, linters & formatters
   use 'williamboman/mason.nvim'
@@ -54,7 +54,7 @@ packer.startup(function(use)
   use 'neovim/nvim-lspconfig' -- Nvim Language Server Protocol
   use 'hrsh7th/cmp-nvim-lsp' -- nvim-cmp source for neovim's built-in LSP
   use 'onsails/lspkind-nvim' -- vscode-like pictograms
-  use({ "glepnir/lspsaga.nvim", branch = "main" }) -- enhanced lsp uis
+  use({ 'glepnir/lspsaga.nvim', branch = 'main' }) -- enhanced lsp uis
 
   -- formatting and linting
   use 'jose-elias-alvarez/null-ls.nvim'
@@ -66,7 +66,7 @@ packer.startup(function(use)
   use 'akinsho/nvim-bufferline.lua' -- Tabs
   use 'nvim-tree/nvim-tree.lua' -- File explore
   use 'lewis6991/gitsigns.nvim'
-  if (packer_bootstrap) then
+  if packer_bootstrap then
     require('packer').sync()
   end
 end)
