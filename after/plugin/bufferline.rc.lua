@@ -8,6 +8,10 @@ local status, bufferline = pcall(require, 'bufferline')
 
 if (not status) then return end
 
+local function is_ft(b, ft)
+  return vim.bo[b].filetype == ft
+end
+
 local function diagnostics_indicator(_, _, diagnostics, _)
   local result = {}
   local symbols = {
@@ -21,33 +25,58 @@ local function diagnostics_indicator(_, _, diagnostics, _)
     end
   end
   result = table.concat(result, ' ')
-  return #result > 0 and result or '
+  return #result > 0 and result or ''
 end
 
-local function kill_buffer(bufnr)
+local function custom_filter(buf, buf_nums)
+  local logs = vim.tbl_filter(function(b)
+    return is_ft(b, "log")
+  end, buf_nums or {})
+  if vim.tbl_isempty(logs) then
+    return true
+  end
+  local tab_num = vim.fn.tabpagenr()
+  local last_tab = vim.fn.tabpagenr "$"
+  local is_log = is_ft(buf, "log")
+  if last_tab == 1 then
+    return true
+  end
+  -- only show log buffers in secondary tabs
+  return (tab_num == last_tab and is_log) or (tab_num ~= last_tab and not is_log)
+end
+
+local function kill_buffer(bufnr, force)
+  local kill_command = 'bd'
   if bufnr == 0 or bufnr == nil then
     bufnr = api.nvim_get_current_buf()
   end
-  bufname = api.nvim_buf_get_name(bufnr)
+  local bufname = api.nvim_buf_get_name(bufnr)
 
   if bo[bufnr].modified then
     warning = fmt([[No write since last change for (%s)]], fnamemodify(bufname, ':t'))
   elseif api.nvim_buf_get_option(bufnr, 'buftype') == 'terminal' then
     warning = fmt([[Terminal %s will be killed]], bufname)
   end
-  if warning then
-    vim.ui.input({
-      prompt = string.format([[%s. Close it anyway? [y]es or [n]o (default: no): ]], warning),
-    }, function(choice)
-      if choice ~= nil and choice:match 'ye?s?' then force = true end
-    end)
-    if not force then return end
+
+  if not force then
+    if warning then
+      vim.ui.input({
+        prompt = string.format([[%s. Close it anyway? [y]es or [n]o (default: no): ]], warning),
+      }, function(choice)
+        if choice ~= nil and choice:match 'ye?s?' then force = true end
+      end)
+      if not force then return end
+    end
   end
 
   -- Get list of windows IDs with the buffer to close
   local windows = vim.tbl_filter(function(win)
     return api.nvim_win_get_buf(win) == bufnr
   end, api.nvim_list_wins())
+
+  if force then
+    kill_command = kill_command .. "!"
+  end
 
   -- Get list of active buffers
   local buffers = vim.tbl_filter(function(buf)
@@ -72,7 +101,7 @@ local function kill_buffer(bufnr)
   -- Check if buffer still exists, to ensure the target buffer wasn't killed
   -- due to options like bufhidden=wipe.
   if api.nvim_buf_is_valid(bufnr) and bo[bufnr].buflisted then
-    vim.cmd(string.format('%s %d', 'bd', bufnr))
+    vim.cmd(string.format('%s %d', kill_command, bufnr))
   end
 end
 
@@ -89,6 +118,7 @@ bufferline.setup {
     indicator = {
       icon = '▎', -- this should be omitted if indicator style is not 'icon'
       style = "icon", -- can also be 'underline'|'none',
+      text_align = 'left'
     },
     buffer_close_icon = '',
     modified_icon = '',
@@ -108,13 +138,14 @@ bufferline.setup {
     diagnostics = "nvim_lsp",
     diagnostics_update_in_insert = false,
     diagnostics_indicator = diagnostics_indicator,
+    custom_filter = custom_filter,
     color_icons = true, -- whether or not to add the filetype icon highlights
     show_buffer_icons = true, -- disable filetype icons for buffers
     show_buffer_close_icons = true,
     show_close_icon = false,
     show_tab_indicators = true,
     persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
-    separator_style = "thin",
+    separator_style = { ' ', ' ' },
     enforce_regular_tabs = false,
     always_show_bufferline = false,
     hover = {
@@ -137,5 +168,5 @@ bufferline.setup {
         padding = 1,
       },
     }
-  }
+  },
 }
