@@ -1,5 +1,4 @@
 local cmd = vim.cmd
-local g = vim.g
 local status, tokyonight = pcall(require, 'tokyonight')
 
 if (not status) then return end
@@ -14,6 +13,9 @@ tokyonight.setup({
     }
     hl.TSTagDelimiter = {
       fg = c.dark5,
+    }
+    hl.NvimTreeFolderIcon = {
+      fg = '#E0AF67'
     }
   end,
   style = 'night',
